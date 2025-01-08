@@ -7,11 +7,11 @@
 
 ### development 
 ### install packages & start local server
-#### ```chmod +x dev.sh```
+#### ```sudo chmod +x dev.sh```
 #### ```./dev.sh```
 
 #
 
 ### production
-#### ```chmod +x prod.sh```
+#### ```sudo chmod +x prod.sh```
 #### ```./prod.sh```
