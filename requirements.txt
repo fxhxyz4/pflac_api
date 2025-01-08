@@ -3,4 +3,3 @@ cryptography
 python-dotenv
 fastapi
 uvicorn
-mysql-connector-python
