@@ -20,3 +20,12 @@
 
 ### For using api
 ### read [api.md](./api.md) file.
+
+#
+
+### Any questions?
+### write in [issues](https://github.com/fxhxyz4/pflac_api/issues/new).
+
+#
+
+### License: [MIT](./license.md).
