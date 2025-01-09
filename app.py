@@ -87,47 +87,6 @@ def get_table_scoring(id: Optional[int] = None, age_group: Optional[int] = None,
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
-@app.get("/table_scoring/")
-def get_table_scoring(
-    id: int = None, 
-    exercise_number: int = None, 
-    gender: str = None
-):
-    query = "SELECT * FROM table_scoring WHERE 1"
-    params = []
-
-    if id is not None:
-        query += " AND score_count = %s"
-        params.append(id)
-    
-    if exercise_number is not None and gender is not None:
-        column_name = None
-        if gender == 'man':
-            column_name = f"exercise_man_{exercise_number}"
-        elif gender == 'woman':
-            column_name = f"exercise_woman_{exercise_number}"
-        else:
-            raise HTTPException(status_code=400, detail="Invalid gender specified")
-        
-        if column_name:
-            query += f" AND {column_name} IS NOT NULL"
-            params.append(exercise_number)
-
-    try:
-        conn = get_db_connection()
-        with conn.cursor() as cursor:
-            cursor.execute(query, params)
-            result = cursor.fetchall()
-        conn.close()
-
-        if not result:
-            return {"message": "No data found matching your criteria"}
-
-        return result
-
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
 @app.get("/table_standarts/")
 def get_table_standarts(
     id: int = None, 
@@ -164,5 +123,36 @@ def get_table_standarts(
             result = cursor.fetchall()
         conn.close()
         return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/table_scoring/")
+def get_table_scoring(gender: str, exercise_num: int, result: float):
+    if gender == 'man':
+        column_name = f"exercise_man_{exercise_num}"
+    elif gender == 'woman':
+        column_name = f"exercise_woman_{exercise_num}"
+    else:
+        raise HTTPException(status_code=400, detail="Invalid gender specified")
+    
+    query = f"""
+        SELECT score_count
+        FROM table_scoring
+        WHERE {column_name} BETWEEN %s AND %s
+    """
+    params = [result - 0.01, result + 0.01]
+
+    try:
+        conn = get_db_connection()
+        with conn.cursor() as cursor:
+            cursor.execute(query, params)
+            result = cursor.fetchall()
+        conn.close()
+
+        if not result:
+            return {"message": "No data found matching your criteria"}
+
+        return result
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
