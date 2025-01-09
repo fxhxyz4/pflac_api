@@ -21,12 +21,6 @@
 
 #
 
-### production
-#### ```sudo chmod +x prod.sh```
-#### ```./prod.sh```
-
-#
-
 ### For using api
 ### read [api.md](./api.md) file.
 
