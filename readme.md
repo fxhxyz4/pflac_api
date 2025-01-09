@@ -5,6 +5,15 @@
 
 #
 
+### requirements
+- ### pymysql
+- ### cryptography
+- ### python-dotenv
+- ### fastapi
+- ### uvicorn
+
+#
+
 ### development 
 ### install packages & start local server
 #### ```sudo chmod +x dev.sh```
