@@ -40,8 +40,7 @@
 ```
 ### Example Request:
 
-### GET ```/table_scoring/?id=1```
-### GET ```/table_scoring/?exercise_number=20&gender=man```
+### GET ```/table_scoring/?gender=man&exercise_num=25&result=13.85```
 
 #
 
