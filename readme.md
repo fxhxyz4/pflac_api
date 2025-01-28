@@ -14,7 +14,7 @@
 
 #
 
-### development 
+### development
 ### install packages & start local server
 #### ```sudo chmod +x dev.sh```
 #### ```./dev.sh```
