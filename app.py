@@ -11,7 +11,7 @@ load_dotenv()
 
 app = FastAPI()
 
-app.mount("/public", StaticFiles(directory="public"), name="static")
+# app.mount("/public", StaticFiles(directory="public"), name="static")
 
 DB_CONFIG = {
     "host": os.getenv("DB_SERVER"),
@@ -33,9 +33,9 @@ def get_db_connection():
         ssl={'ca': './ca.pem'}
 )
 
-@app.get("/")
-def read_root():
-    return FileResponse("./public/index.html")
+# @app.get("/")
+# def read_root():
+#     return FileResponse("./public/index.html")
 
 @app.get("/status/")
 def read_root():
