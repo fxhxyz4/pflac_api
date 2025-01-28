@@ -1,5 +1,10 @@
 ## API Documentation - v1
 
+### GET ```/status/```
+### Return server status
+
+#
+
 ### GET ```/last_change/```
 
 #### Retrieve all records from the last_change table.
