@@ -41,16 +41,6 @@ def read_root():
 def read_root():
     return {"status": "API 200"}
 
-@app.get("/debug/")
-def debug_config():
-    return {
-        "DB_PORT": DB_CONFIG["port"],
-        "DB_NAME": "datadb",
-        "DB_USER": DB_CONFIG["user"],
-        "DB_PASS": "*****************",
-        "DB_SERVER": "xxx-xxx-xxx.xxx.com",
-    }
-
 @app.get("/last_change/")
 def get_last_change():
     try:
