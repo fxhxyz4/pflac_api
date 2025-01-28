@@ -18,19 +18,19 @@
 
 -- TRIGGER FOR table_physical --
 CREATE TRIGGER `update_physical` AFTER UPDATE ON `table_physical`
- FOR EACH ROW BEGIN
+  FOR EACH ROW BEGIN
     UPDATE last_change SET date = CURDATE();
 END
 
 -- TRIGGER FOR table_scoring --
 CREATE TRIGGER `update_scoring` AFTER UPDATE ON `table_scoring`
- FOR EACH ROW BEGIN
+  FOR EACH ROW BEGIN
     UPDATE last_change SET date = CURDATE();
 END
 
 -- TRIGGER FOR table_standarts --
 CREATE TRIGGER `update_standarts` AFTER UPDATE ON `table_standarts`
- FOR EACH ROW BEGIN
+  FOR EACH ROW BEGIN
     UPDATE last_change SET date = CURDATE();
 END
 
