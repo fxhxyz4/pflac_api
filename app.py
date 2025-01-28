@@ -30,7 +30,7 @@ def get_db_connection():
         port=DB_CONFIG["port"],
         cursorclass=pymysql.cursors.DictCursor,
         charset="utf8mb4",
-        ssl={'ca': './ca.pem'}
+        ssl_ca="ca': './ca.pem"
 )
 
 # @app.get("/")
