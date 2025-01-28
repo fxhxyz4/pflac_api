@@ -1,43 +1,47 @@
 const LST = document.querySelector(".main__source");
 const USER_NAME = "M-it-2";
 
-const localGetUser = () => {
-  const repos = JSON.parse(localStorage.getItem("repos"));
+const localGetUser = async () => {
+  const storedRepos = JSON.parse(localStorage.getItem("repos")) || [];
+  const latestRepos = await fetchLatestRepos(USER_NAME);
 
-  if (!repos || repos.length === 0) {
-    firstGetUser(USER_NAME).then(fetchedRepos => {
-      if (fetchedRepos) {
-        displayRepos(fetchedRepos);
-      }
-    });
-
+  if (!latestRepos) {
+    if (storedRepos.length > 0) {
+      displayRepos(storedRepos);
+    }
     return;
   }
 
-  displayRepos(repos);
-}
+  const isUpdated = JSON.stringify(latestRepos) !== JSON.stringify(storedRepos);
+
+  if (isUpdated) {
+    localStorage.setItem("repos", JSON.stringify(latestRepos));
+    LST.innerHTML = "";
+    displayRepos(latestRepos);
+  } else {
+    displayRepos(storedRepos);
+  }
+};
 
 document.addEventListener("DOMContentLoaded", localGetUser);
 
-async function firstGetUser(username) {
+const fetchLatestRepos = async (username) => {
   try {
     const res = await fetch(`https://api.github.com/users/${username}/repos`);
 
     if (!res.ok) {
-      throw new Error('Error while fetch data');
+      throw new Error('Error while fetching data');
     }
 
     const repos = await res.json();
     repos.sort((a, b) => a.name.localeCompare(b.name));
 
-    let sliced = repos.slice(0, 5);
-    localStorage.setItem("repos", JSON.stringify(sliced));
-
-    return sliced;
+    return repos.slice(0, 5);
   } catch (e) {
     console.error('Error: ', e);
+    return null;
   }
-}
+};
 
 const displayRepos = (repos) => {
   repos.forEach(repo => {
@@ -47,4 +51,4 @@ const displayRepos = (repos) => {
       </li>
     `);
   });
-}
+};
