@@ -1,11 +1,5 @@
 ## API Documentation - v1
 
-### GET ```/debug/```
-
-#### Debug endpoint to fetch database configuration details.
-
-#
-
 ### GET ```/last_change/```
 
 #### Retrieve all records from the last_change table.
