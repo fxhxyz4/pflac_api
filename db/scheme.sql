@@ -16,23 +16,35 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- TRIGGER FOR table_physical --
-CREATE TRIGGER `update_physical` AFTER UPDATE ON `table_physical`
-  FOR EACH ROW BEGIN
-    UPDATE last_change SET date = CURDATE();
-END
+-- Change delimiter to avoid conflict with trigger body
+DELIMITER $$
 
--- TRIGGER FOR table_scoring --
-CREATE TRIGGER `update_scoring` AFTER UPDATE ON `table_scoring`
-  FOR EACH ROW BEGIN
+-- TRIGGER FOR table_physical
+CREATE TRIGGER `update_physical` 
+AFTER UPDATE ON `table_physical`
+FOR EACH ROW 
+BEGIN
     UPDATE last_change SET date = CURDATE();
-END
+END$$
 
--- TRIGGER FOR table_standarts --
-CREATE TRIGGER `update_standarts` AFTER UPDATE ON `table_standarts`
-  FOR EACH ROW BEGIN
+-- TRIGGER FOR table_scoring
+CREATE TRIGGER `update_scoring` 
+AFTER UPDATE ON `table_scoring`
+FOR EACH ROW 
+BEGIN
     UPDATE last_change SET date = CURDATE();
-END
+END$$
+
+-- TRIGGER FOR table_standarts
+CREATE TRIGGER `update_standarts` 
+AFTER UPDATE ON `table_standarts`
+FOR EACH ROW 
+BEGIN
+    UPDATE last_change SET date = CURDATE();
+END$$
+
+-- Reset delimiter back to default
+DELIMITER ;
 
 --
 -- Table structure for table `last_change`
@@ -42,7 +54,9 @@ DROP TABLE IF EXISTS `last_change`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE IF NOT EXISTS `last_change` (
-  date DATE NOT NULL DEFAULT '2025-01-01'
+  `id` int NOT NULL AUTO_INCREMENT,
+  date DATE NOT NULL DEFAULT '2025-01-01',
+  PRIMARY KEY(`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -52,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `last_change` (
 
 LOCK TABLES `last_change` WRITE;
 /*!40000 ALTER TABLE `last_change` DISABLE KEYS */;
-INSERT INTO `last_change` VALUES ('2025-01-01');
+INSERT INTO `last_change` VALUES (1, '2025-01-01');
 /*!40000 ALTER TABLE `last_change` ENABLE KEYS */;
 UNLOCK TABLES;
 
