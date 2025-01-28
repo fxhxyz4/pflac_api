@@ -1,3 +1,5 @@
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from fastapi import FastAPI, HTTPException
 from dotenv import load_dotenv
 from typing import Optional
@@ -8,6 +10,8 @@ import os
 load_dotenv()
 
 app = FastAPI()
+
+app.mount("/public", StaticFiles(directory="public"), name="static")
 
 DB_CONFIG = {
     "host": os.getenv("DB_SERVER"),
@@ -30,6 +34,10 @@ def get_db_connection():
 )
 
 @app.get("/")
+def read_root():
+    return FileResponse("./public/index.html")
+
+@app.get("/status/")
 def read_root():
     return {"status": "API 200"}
 
@@ -63,7 +71,7 @@ def get_table_scoring(id: Optional[int] = None, age_group: Optional[int] = None,
         with conn.cursor() as cursor:
             query = "SELECT * FROM table_physical WHERE 1=1"
             params = []
-            
+
             if id is not None:
                 query += " AND id = %s"
                 params.append(id)
@@ -79,7 +87,7 @@ def get_table_scoring(id: Optional[int] = None, age_group: Optional[int] = None,
             if exercise_name is not None:
                 query += " AND exercise_name = %s"
                 params.append(exercise_name)
-            
+
             cursor.execute(query, params)
             result = cursor.fetchall()
         conn.close()
@@ -89,12 +97,12 @@ def get_table_scoring(id: Optional[int] = None, age_group: Optional[int] = None,
 
 @app.get("/table_standarts/")
 def get_table_standarts(
-    id: int = None, 
-    category: int = None, 
-    age_group: int = None, 
-    score: int = None, 
-    rating_5: str = None, 
-    rating_4: str = None, 
+    id: int = None,
+    category: int = None,
+    age_group: int = None,
+    score: int = None,
+    rating_5: str = None,
+    rating_4: str = None,
     rating_3: str = None
 ):
     query = "SELECT * FROM table_standarts WHERE 1"
@@ -103,7 +111,7 @@ def get_table_standarts(
     if id is not None:
         query += " AND id = %s"
         params.append(id)
-    
+
     if category is not None:
         query += " AND category = %s"
         params.append(category)
@@ -134,7 +142,7 @@ def get_table_scoring(gender: str, exercise_num: int, result: float):
         column_name = f"exercise_woman_{exercise_num}"
     else:
         raise HTTPException(status_code=400, detail="Invalid gender specified")
-    
+
     query = f"""
         SELECT score_count
         FROM table_scoring
