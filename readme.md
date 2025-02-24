@@ -1,34 +1,42 @@
-## PFLAC_API hosted on [render](https://render.com)
+## PFLAC_API hosted on [render](https://render.com).
 
-### 1. rename .env.example to .env
-### 2. change data in .env
-
-#
-
-### requirements
-- ### pymysql
-- ### cryptography
-- ### python-dotenv
-- ### fastapi
-- ### uvicorn
+_This project is a lightweight and efficient API database wrapper built with **FastAPI**, designed to interact with the **[PFLAC APP](https://github.com/M-it-2/PFLAC)**. It simplifies database operations, providing a structured and performant GET methods way to query._
 
 #
 
-### development
-### install packages & start local server
-#### ```sudo chmod +x dev.sh```
-#### ```./dev.sh```
+### .ENV
+
+#### 1. rename .env.example to .env
+#### 2. change data in .env
 
 #
 
-### For using api
-### read [api.md](./api.md) file.
+### project requirements:
+- ### [pymysql](https://pypi.org/project/PyMySQL/).
+- ### [cryptography](https://pypi.org/project/cryptography/).
+- ### [python-dotenv](https://pypi.org/project/python-dotenv/).
+- ### [fastapi](https://pypi.org/project/fastapi/).
+- ### [uvicorn](https://pypi.org/project/uvicorn/).
+
+#
+
+### Development:
++ #### install packages & start local server:
+```sh
+  sudo chmod +x dev.sh && ./dev.sh
+```
+
+#
+
+### API documentation:
++ ### read [api.md](./api.md) file.
 
 #
 
 ### Any questions?
-### write in [issues](https://github.com/fxhxyz4/pflac_api/issues/new).
++ #### write in [issues](https://github.com/fxhxyz4/pflac_api/issues/new).
++ #### write in [discussion](https://github.com/fxhxyz4/pflac_api/discussions).
 
 #
 
-### License: [MIT](./license.md).
+### License: [MIT License](./license.md).
