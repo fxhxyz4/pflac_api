@@ -100,7 +100,7 @@ CREATE TABLE IF NOT EXISTS `table_standarts` (
 
 LOCK TABLES `last_change` WRITE;
 /*!40000 ALTER TABLE `last_change` DISABLE KEYS */;
-INSERT INTO `last_change` VALUES (1, '2025-01-01');
+INSERT INTO `last_change` VALUES (1, '2026-01-01');
 /*!40000 ALTER TABLE `last_change` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -134,36 +134,6 @@ INSERT INTO `table_standarts` VALUES (1,1,25,85,'295/390','275/360','255/340'),(
 /*!40000 ALTER TABLE `table_standarts` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
--- Change delimiter to avoid conflict with trigger body
-DELIMITER $$
-
--- TRIGGER FOR table_physical
-CREATE TRIGGER `update_physical` 
-AFTER UPDATE ON `table_physical`
-FOR EACH ROW 
-BEGIN
-    UPDATE last_change SET date = CURDATE();
-END$$
-
--- TRIGGER FOR table_scoring
-CREATE TRIGGER `update_scoring` 
-AFTER UPDATE ON `table_scoring`
-FOR EACH ROW 
-BEGIN
-    UPDATE last_change SET date = CURDATE();
-END$$
-
--- TRIGGER FOR table_standarts
-CREATE TRIGGER `update_standarts` 
-AFTER UPDATE ON `table_standarts`
-FOR EACH ROW 
-BEGIN
-    UPDATE last_change SET date = CURDATE();
-END$$
-
--- Reset delimiter back to default
-DELIMITER ;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
