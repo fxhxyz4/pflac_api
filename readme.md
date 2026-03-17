@@ -1,4 +1,4 @@
-## PFLAC_API hosted on [render](https://render.com).
+## PFLAC_API
 
 _This project is a lightweight and efficient API database wrapper built with **FastAPI**, designed to interact with the **[PFLAC APP](https://github.com/M-it-2/PFLAC)**. It simplifies database operations, providing a structured and performant GET methods way to query._
 
