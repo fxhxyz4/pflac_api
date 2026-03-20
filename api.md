@@ -42,11 +42,11 @@
     id (int, optional): Filter by score_count.
     exercise_number (int, required): Filter by the exercise number. Requires the gender parameter.
     gender (str, required): Filter by gender (man or woman). Requires the exercise_number parameter.
-    result (float, required): Filter by result. Requires the exercise_number & gender  parameter.
+    score_result (float, required): Filter by result. Requires the exercise_number & gender  parameter.
 ```
 ### Example Request:
-### _gender & exercise_num & result is a required params_
-### GET ```/table_scoring/?gender=man&exercise_num=25&result=13.85```
+### _gender & exercise_num & score_result is a required params_
+### GET ```/table_scoring/?gender=man&exercise_num=25&score_result=13.85```
 
 #
 
